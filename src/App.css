@@ -25602,3 +25602,12 @@ html body #root .reader-tab-panel-active .reader-article
     margin: 12px auto 18px !important;
   }
 }
+
+/* Restore the proportional bars in Wikipedia's Module:Chart bar-chart tables.
+   Their original stylesheet is removed with the article HTML, so give the
+   preserved width-based bar lines an explicit height and dark-mode purple fill. */
+.reader-article table.bar-chart .bar-chart-bar-line {
+  display: block !important;
+  height: 16px !important;
+  background-color: #7b4b84 !important;
+}
