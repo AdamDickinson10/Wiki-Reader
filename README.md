@@ -11,3 +11,7 @@ The names “Wiki Reader” and “Wiki-Reader,” along with the project logo a
 ## Contributing
 
 Wiki-Reader was built with help from OpenAI Codex by a maintainer with no programming experience. If your pull request changes the app's appearance, please consider including before-and-after screenshots when applicable, along with a brief plain-language description of what changed. This is a suggestion to help the maintainer review contributions; screenshots are not needed for changes with no visual impact.
+
+### Development workflow
+
+Use Tauri's Web Inspector (⌘⌥I on macOS) to inspect the DOM, test, diagnose, and optimize Wiki-Reader.
