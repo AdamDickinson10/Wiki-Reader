@@ -2,6 +2,10 @@
 
 A native desktop Wikipedia reader for searching articles
 
+<p align="center">
+  <img src="docs/images/wiki-reader-nasa-article.png" alt="Wiki-Reader displaying the NASA Wikipedia article" width="900">
+</p>
+
 ## License
 
 The Wiki-Reader source code is licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for the full license text.
