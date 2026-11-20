@@ -14,4 +14,4 @@ Wiki-Reader was built with help from OpenAI Codex by a maintainer with no progra
 
 ### Development workflow
 
-Use Tauri's Web Inspector (⌘⌥I on macOS) to inspect the DOM, test, diagnose, and optimize Wiki-Reader.
+Use Tauri's Web Inspector [DOM](https://en.wikipedia.org/wiki/DOM_Inspector) (⌘⌥I Command Option I on macOS) to inspect test, diagnose, and optimize the Wiki-Reader app live before doing a local patch and pull request.
