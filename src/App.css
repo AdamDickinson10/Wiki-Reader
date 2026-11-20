@@ -25611,3 +25611,47 @@ html body #root .reader-tab-panel-active .reader-article
   height: 16px !important;
   background-color: #7b4b84 !important;
 }
+
+/* Keep infobox collages compact when preserved wrappers force image tiles to stack. */
+.reader-article .infobox .reader-infobox-image-collage {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  align-items: start !important;
+  gap: 2px !important;
+  width: min(100%, 300px) !important;
+  max-width: 100% !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.reader-article .infobox .reader-infobox-image-collage > div,
+.reader-article .infobox .reader-infobox-image-collage div,
+.reader-article .infobox .reader-infobox-image-collage span[typeof="mw:File"] {
+  display: contents !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.reader-article .infobox .reader-infobox-image-collage
+  a.reader-infobox-image-file-link {
+  display: block !important;
+  width: auto !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  line-height: 0 !important;
+}
+
+.reader-article .infobox .reader-infobox-image-collage img {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  margin: 0 !important;
+}
+
+.reader-article .infobox .reader-infobox-image-collage
+  a.reader-infobox-image-collage-lead {
+  grid-column: 1 / -1 !important;
+}
