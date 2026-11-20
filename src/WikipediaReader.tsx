@@ -20689,9 +20689,10 @@ function markReaderInfoboxInlineIcons(document: Document) {
       .join(" ")
       .toLowerCase();
 
-    const looksLikeInlineIcon =
-      (largestKnownSide > 0 && largestKnownSide <= 48) ||
-      /bus|rail|train|tram|subway|ferry|airport|airplane|icon/.test(textClue);
+    const hasExplicitSize = width > 0 || height > 0;
+    const looksLikeInlineIcon = hasExplicitSize
+      ? largestKnownSide <= 48
+      : /bus|rail|train|tram|subway|ferry|airport|airplane|icon/.test(textClue);
 
     if (!looksLikeInlineIcon) {
       return;
