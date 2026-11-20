@@ -4141,6 +4141,22 @@ function markReaderBarBoxes(document: Document) {
       return /^\d+(?:\.\d+)?px$/i.test(width) && Boolean(background);
     }) || null;
 
+  const getGenderBarRows = (table: HTMLTableElement) =>
+    Array.from(table.querySelectorAll<HTMLTableRowElement>("tr"))
+      .map((row) => {
+        const cells = getCells(row);
+        const valueText = (cells[cells.length - 1]?.textContent || "").trim();
+        const bars = cells.length >= 3
+          ? Array.from(cells[1].querySelectorAll<HTMLElement>(".reader-preserved-background, [style*='--reader-preserved-background']"))
+              .filter((bar) => /^\d+(?:\.\d+)?px$/i.test(bar.style.width.trim()))
+          : [];
+
+        return /[\u2642\u2640]/.test(valueText) && bars.length >= 2
+          ? { row, cells, bars }
+          : null;
+      })
+      .filter((entry): entry is NonNullable<typeof entry> => entry !== null);
+
   const getCountRows = (table: HTMLTableElement) =>
     Array.from(table.querySelectorAll<HTMLTableRowElement>("tr"))
       .map((row) => {
@@ -4172,10 +4188,26 @@ function markReaderBarBoxes(document: Document) {
           ),
         );
 
-      return hasPercentData || getCountRows(candidate).length >= 2;
+      return hasPercentData || getCountRows(candidate).length >= 2 || getGenderBarRows(candidate).length >= 2;
     });
 
     if (!table) return;
+
+    const genderBarRows = getGenderBarRows(table);
+    if (genderBarRows.length >= 2) {
+      barbox.classList.add("reader-barbox-gender-chart");
+      table.classList.add("reader-barbox-gender-chart-table");
+      table.closest<HTMLElement>(".reader-table-caption-group, .reader-table-caption-group-right")
+        ?.classList.add("reader-barbox-gender-chart-group");
+
+      genderBarRows.forEach(({ cells, bars }) => {
+        cells[0].classList.add("reader-barbox-gender-chart-label");
+        cells[1].classList.add("reader-barbox-gender-chart-bars");
+        cells[cells.length - 1].classList.add("reader-barbox-gender-chart-values");
+        bars.forEach((bar) => bar.classList.add("reader-barbox-gender-chart-bar"));
+      });
+      return;
+    }
 
     const countRows = getCountRows(table);
     const isCountBarTable = countRows.length >= 2;
@@ -22748,7 +22780,12 @@ function markReaderTableColorSwatches(document: Document) {
       "table:not(.infobox) td .reader-preserved-background, table:not(.infobox) th .reader-preserved-background",
     )
     .forEach((element) => {
-      if (element.classList.contains("reader-barbox-real-bar")) return;
+      if (
+        element.classList.contains("reader-barbox-real-bar") ||
+        element.classList.contains("reader-barbox-gender-chart-bar")
+      ) {
+        return;
+      }
 
       if (
         [

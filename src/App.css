@@ -12463,6 +12463,54 @@ html body #root .reader-tab-panel-active .reader-article .infobox .geo-inline a.
   text-decoration-color: rgba(100, 168, 255, 0.75) !important;
 }
 
+/* Native proportional bars in multi-series Wikipedia barbox tables. */
+.reader-article .reader-barbox-gender-chart {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+
+.reader-article .reader-barbox-gender-chart-group {
+  border: 1px solid #a2a9b1 !important;
+  padding: 8px 8px 8px 4px !important;
+}
+
+.reader-article table.reader-barbox-gender-chart-table {
+  border: 0 !important;
+  border-collapse: collapse !important;
+  margin-left: 0 !important;
+  border-spacing: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.reader-article table.reader-barbox-gender-chart-table > tbody > tr > :is(td, th) {
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0.2em 0.45em !important;
+  line-height: 1.12 !important;
+  vertical-align: middle !important;
+}
+
+.reader-article table.reader-barbox-gender-chart-table .reader-barbox-gender-chart-values {
+  white-space: nowrap !important;
+}
+
+.reader-article table.reader-barbox-gender-chart-table .reader-barbox-gender-chart-bar {
+  display: block !important;
+  height: 12px !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+  padding: 0 !important;
+  margin: 1px 0 !important;
+  border: 0 !important;
+  background: var(--reader-preserved-background) !important;
+}
+
 /* ADAM final: tighter image/media captions
    Caption text should sit close to the image edge with less vertical dead space. */
 .reader-article figure figcaption,
