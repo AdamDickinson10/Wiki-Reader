@@ -14,4 +14,8 @@ Wiki-Reader was built with help from OpenAI Codex by a maintainer with no progra
 
 ### Development workflow
 
+<img src="docs/images/dom-inspector-workflow.png" alt="Wiki-Reader open beside the Web Inspector console" width="420" align="right">
+
 Use Tauri's Web Inspector (⌘⌥I on macOS) to inspect the DOM, test, diagnose, and optimize Wiki-Reader.
+
+<br clear="right">
