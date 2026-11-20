@@ -19132,6 +19132,7 @@ function sanitizeWikipediaHtml(html: string, pageTitle = "") {
 
   markReaderInfoboxUniformImageLabels(document);
   polishReaderInfoboxImageSpacing(document);
+  markReaderInfoboxImageCollages(document);
 
   markReaderEditorWidthImageCards(document);
 
@@ -20783,6 +20784,49 @@ function polishReaderInfoboxImageSpacing(document: Document) {
       } else if (/\b(?:logo|wordmark)\b/.test(clue)) {
         figure.style.setProperty("margin-bottom", "4px", "important");
       }
+    });
+}
+
+
+function markReaderInfoboxImageCollages(document: Document) {
+  document
+    .querySelectorAll<HTMLElement>(".infobox td, .infobox th")
+    .forEach((cell) => {
+      const collage = Array.from(
+        cell.querySelectorAll<HTMLElement>(".reader-preserved-border"),
+      ).find((candidate) => {
+        const images = Array.from(
+          candidate.querySelectorAll<HTMLImageElement>("img"),
+        );
+
+        if (images.length < 3) {
+          return false;
+        }
+
+        const widths = images
+          .map((image) => Number.parseInt(image.getAttribute("width") || "", 10))
+          .filter((width) => Number.isFinite(width) && width > 0)
+          .sort((first, second) => second - first);
+
+        return widths.length >= 3 && widths[0] >= widths[1] * 1.5;
+      });
+
+      if (!collage) {
+        return;
+      }
+
+      const leadImage = Array.from(
+        collage.querySelectorAll<HTMLImageElement>("img"),
+      ).sort(
+        (first, second) =>
+          Number.parseInt(second.getAttribute("width") || "", 10) -
+          Number.parseInt(first.getAttribute("width") || "", 10),
+      )[0];
+
+      collage.classList.add("reader-infobox-image-collage");
+      leadImage
+        ?.closest("a.reader-infobox-image-file-link")
+        ?.classList.add("reader-infobox-image-collage-lead");
     });
 }
 
